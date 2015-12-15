@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Lataa tiedostoja palvelimelle</title>
+<link rel="stylesheet" href="./dropzone.css">
+<style>
+	.galleria img {
+		padding: 20px;
+	}
+</style>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="container-fluid">
+	<h1>Lataa tiedostoja projekti-palvelimelle</h1>
+	<p>
+	Lataa tiedostot palvelimelle raahaamalla ne tänne alla näkyvään laatikkoon. Voit raahata monta kuvaa kerralla. Jos selain ei tue raahaamista, voit ladata kuvan kerrallaan klikkaamalla aluetta ja valitsemalla kuvan
+	</p>
+
+	<!-- Change /upload-target to your upload address -->
+	<form action="upload.php" class="dropzone">
+	<div class="dz-message" data-dz-message><span>Pudota tiedostot tähän</span></div>
+	</form>
+</div>
+<div class="galleria">
+<?php
+
+	$handle = opendir(dirname(realpath(__FILE__)) . '/uploads/');
+	while ($file = readdir($handle)){
+		if ($file !== "." && $file !== ".."){
+			echo '<img src="uploads/' . $file . '" widht="250" height="250">&nbsp;';
+		}
+	}
+?>
+</div>
+
+</body>
+<script src="./dropzone.js"></script>
+
+</script>
+</html>
